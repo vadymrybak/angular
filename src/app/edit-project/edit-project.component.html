@@ -14,7 +14,7 @@
     <button type="button" class="close" aria-label="Close" (click)="close('errorMessage')">
       <span aria-hidden="true">×</span>
     </button>
-    <strong>Error!</strong> An error occured while saving the project.
+    <strong>Error!</strong> An error occured while contacting the server...
   </div>
 
 
@@ -39,7 +39,7 @@
           <label for="txtIdentifier" class="col-sm-3 control-label">Identifier</label>
           <div class="col-sm-9">
             <input type="text" class="form-control" id="txidentifier" placeholder="Please enter identifier" name="identifier" formControlName="identifier">
-            <div class="formError" *ngIf="projectForm.controls.data.controls['identifier'].errors?.required">Identifier is required.</div>
+            <div class="formError" *ngIf="projectForm.controls.data.controls['identifier'].errors?.required && projectForm.controls.data.controls['identifier'].dirty">Identifier is required.</div>
             <div class="formError" *ngIf="projectForm.controls.data.controls['identifier'].invalid && !projectForm.controls.data.controls['identifier'].errors?.required">Identifier is invalid.</div>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <label for="txtProjectName" class="col-sm-3 control-label">Project Name</label>
           <div class="col-sm-9">
             <input type="text" class="form-control" id="txtProjectName" placeholder="Please enter project name" name="name" formControlName="name">
-            <div class="formError" *ngIf="projectForm.controls.data.controls['name'].errors?.required">Project name is required.</div>
+            <div class="formError" *ngIf="projectForm.controls.data.controls['name'].errors?.required && projectForm.controls.data.controls['name'].dirty">Project name is required.</div>
           </div>
         </div>
 
@@ -56,9 +56,16 @@
           <label for="txtOwner" class="col-sm-3 control-label">Programmer's Name</label>
           <div class="col-sm-9">
             <input type="text" class="form-control" id="txtProgrammerName" placeholder="Please enter programmer name" name="owner" formControlName="owner">
-            <div class="formError" *ngIf="projectForm.controls.data.controls['owner'].errors?.required">Owner name is required.</div>
+            <div class="formError" *ngIf="projectForm.controls.data.controls['owner'].errors?.required && projectForm.controls.data.controls['owner'].errors?.dirty">Owner name is required.</div>
           </div>
         </div>
+
+        <div class="form-group">
+            <label for="txtDescription" class="col-sm-3 control-label">Description</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="txtDescription" placeholder="Please enter description" name="description" formControlName="description"></textarea>
+            </div>
+          </div>
 
         <div class="form-group">
           <label for="txtDateCreated" class="col-sm-3 control-label">Date Created</label>
@@ -70,13 +77,10 @@
       </div>
 
       <div class="form-group">
-        <div class="col-sm-12" *ngIf="pageType === 'add'">
-          <button type="submit" class="btn btn-primary btn-block" [disabled]="!projectForm.valid" (click)="add()">Add</button>
-        </div>
-
-        <div class="col-sm-12" *ngIf="pageType === 'edit'">
+        <div class="col-sm-12">
           <button type="button" class="btn btn-default btn-block" routerLink="/projects">Back</button>
-          <button type="button" class="btn btn-primary btn-block" [disabled]="!projectForm.valid || projectForm.pristine" (click)="save()">Edit</button>
+          <button type="submit" class="btn btn-primary btn-block" *ngIf="pageType === 'add'" [disabled]="!projectForm.valid" (click)="add()">Add</button>
+          <button type="button" class="btn btn-primary btn-block" *ngIf="pageType === 'edit'" [disabled]="!projectForm.valid || projectForm.pristine" (click)="save()">Edit</button>
         </div>
       </div>
 

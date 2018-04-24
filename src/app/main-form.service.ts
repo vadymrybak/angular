@@ -22,9 +22,7 @@ export class MainFormService {
                   owner: this.formBuilder.control('', Validators.compose([
                       Validators.required
                   ])),
-                  description: this.formBuilder.control('', Validators.compose([
-                    Validators.required
-                  ])),
+                  description: this.formBuilder.control(''),
                   date_created: this.formBuilder.control('', Validators.compose([
                     Validators.required
                   ]))

@@ -12,7 +12,8 @@ const links = {
     get : "/api/projects/",
     getById : "/api/project/",
     update : "/api/update/",
-    getProjectCount: "/api/projectCount/"
+    getProjectCount: "/api/projectCount/",
+    add: "/api/addProject/"
 };
 
 @Injectable()
@@ -42,6 +43,10 @@ export class AppDataService {
 
     updateProject (project: Project): Observable<any> {
         return this.http.put(links.update, project, httpOptions);
+    }
+
+    addProject (project: Project): Observable<any> {
+        return this.http.post(links.add, project, httpOptions);
     }
 
 }

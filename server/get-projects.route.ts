@@ -18,7 +18,7 @@ export function getAllProjects(req: Request, res: Response) {
             {
                 payload: Object.keys(PROJECTS).filter((i, index) => +index >= from && +index < until).map((key) => PROJECTS[key])
             });
-    }, 1000);
+    }, 500);
 
     
 

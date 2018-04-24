@@ -4,6 +4,7 @@ import {getAllProjects} from "./get-projects.route";
 import { getProjectById } from './get-project-by-id';
 import { updateProjectById } from './update-project-by-id';
 import { getProjectCount } from './get-project-count';
+import { addProject } from './add-project';
 
 const app: Application = express();
 
@@ -16,6 +17,7 @@ app.route('/api/projects/:page/:itemsPerPage/:searchString?').get(getAllProjects
 app.route('/api/project/:id').get(getProjectById);
 app.route('/api/update').put(updateProjectById);
 app.route('/api/projectCount').get(getProjectCount);
+app.route('/api/addProject').post(addProject);
 
 
 const httpServer = app.listen(9000, () => {
