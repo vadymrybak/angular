@@ -18,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { AddProjectComponent } from './add-project/add-project.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     AboutComponent,
     ProjectListComponent,
     EditProjectComponent,
-    PaginationComponent
+    PaginationComponent,
+    AddProjectComponent
   ],
   imports: [
     BrowserModule,
