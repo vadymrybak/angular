@@ -1,0 +1,42 @@
+<nav aria-label="Page navigation" *ngIf="pageArray.length > 0" >
+    <ul class="pagination">
+
+      <li (click)="goToFirst()"
+          *ngIf="displayFirstLast"
+          [class.disabled]="activePage == 1">
+        <a href="" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <li (click)="prevClick()"
+          [class.disabled]="activePage == 1">
+        <a href="" aria-label="Previous">
+          <span aria-hidden="true">&lsaquo;</span>
+        </a>
+      </li>
+
+      <li *ngFor="let page of pageArray ; let i = index"
+          [class.active]="activePage == page"
+          (click)='clicked(page)'>
+        <a href="">{{ page }}</a>
+      </li>
+      
+
+      <li (click)="nextClick()"
+          [class.disabled]="activePage == actualPageCount">
+        <a href="" aria-label="Next">
+          <span aria-hidden="true">&rsaquo;</span>
+        </a>
+      </li>
+
+      <li 
+          *ngIf="displayFirstLast"
+          [class.disabled]="activePage == actualPageCount">
+        <a href="" aria-label="Next" (click)="goToLast()">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>

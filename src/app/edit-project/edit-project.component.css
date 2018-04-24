@@ -1,0 +1,10 @@
+.panel  {
+    width: 50%;
+    margin: 0px auto;
+}
+
+.btn  {
+    display: inline;
+    width: 49%;
+    margin-top: 0px;
+}

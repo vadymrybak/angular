@@ -1,0 +1,9 @@
+.jumbotron {
+    background-color: #555;
+    color: #FFF;
+}
+
+.thumbnail a>img, .thumbnail>img {
+    max-height: 181px;
+    width: 100%;
+}
