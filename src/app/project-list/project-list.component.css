@@ -17,3 +17,12 @@
     cursor: pointer;
     font-size: 1.5em;
 }
+
+.tableHeader {
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.tableHeader:hover {
+    color:#009fff
+}

@@ -15,7 +15,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { Subject } from 'rxjs/Subject';
 import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-
+declare let $ : any;
 
 
 @Component({
@@ -24,6 +24,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
   styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
+  
   projectSubject$ = new BehaviorSubject<Search>(new Search(1));  // Set initial page to be 1
   globalSearch = new Search(1);
   projects_array: Project[] = new Array();
@@ -33,7 +34,6 @@ export class ProjectListComponent implements OnInit {
   itemsPerpage: number = 10;
   projectCount: number = 0;
 
-
   constructor(private appDataService: AppDataService) { }
 
   ngOnDestroy(){
@@ -41,6 +41,8 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.globalSearch.sortOrder = Order.DESC;
+
     const projectCount$ = this.appDataService.getProjectscount().subscribe(data => {
       this.projectCount = data;
     });
@@ -62,6 +64,32 @@ export class ProjectListComponent implements OnInit {
     this.currentProject = project;
   }
 
+  deleteClicked(project: Project) {
+    this.currentProject = project;
+  }
+
+  deleteConfirmed(){
+    const deleteProject$ = this.appDataService.deleteProject(this.currentProject.id).subscribe(response => {
+      console.log("Success: ", response);
+      $.notify({
+        // options
+        message: 'Project Deleted' 
+      },{
+        // settings
+        type: 'warning',
+        placement : {
+          from : "bottom",
+          align: "right"
+        }
+      });
+      this.projectSubject$.next(this.globalSearch);
+      },
+      error => {
+        console.log("error:", error);
+    }
+    );
+  }
+
   editClicked() {
     this.editLoading = true;
   }
@@ -76,5 +104,18 @@ export class ProjectListComponent implements OnInit {
     this.globalSearch.searchString = $value;
     this.projectSubject$.next(this.globalSearch);
     console.log($value);
+  }
+
+  sortBy(field: string): void{
+    this.loading = true;
+
+    if (this.globalSearch.sortField === field)
+      this.globalSearch.sortOrder = this.globalSearch.sortOrder == Order.ASC ? this.globalSearch.sortOrder = Order.DESC : this.globalSearch.sortOrder = Order.ASC;
+
+    this.globalSearch.sortOrder = this.globalSearch.sortOrder;
+    this.globalSearch.sortField = field;
+
+    this.projectSubject$.next(this.globalSearch);
+
   }
 }

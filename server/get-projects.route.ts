@@ -11,7 +11,7 @@ export function getAllProjects(req: Request, res: Response) {
     let from: number = page * itemsPerPage;
     let until: number = +from + +itemsPerPage;
 
-    console.log(page, from, until);
+    //console.log(page, from, until);
 
     setTimeout(function() {
         res.status(200).json(

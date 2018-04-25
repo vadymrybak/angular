@@ -20,6 +20,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { AddProjectComponent } from './add-project/add-project.component';
+import { ChosenDirective } from './chosen.directive';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AddProjectComponent } from './add-project/add-project.component';
     ProjectListComponent,
     EditProjectComponent,
     PaginationComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    ChosenDirective
   ],
   imports: [
     BrowserModule,
