@@ -1,13 +1,8 @@
-<div class="editLoading" *ngIf="editLoading">
-  <img src="./assets/loading-big.gif" alt="edit loading...">
-</div>
-
-
-<div class="row">
-  <div class="col-xs-12 col-sm-6 col-md-6">
+<div class="row" *ngIf="!newPageLoading">
+  <div class="col-xs-8 col-sm-6 col-md-6">
     <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchString" (ngModelChange)="searchInputChanged($event)">
   </div>
-  <div class="col-xs-12 col-sm-6 col-md-6">
+  <div class="col-xs-4 col-sm-6 col-md-6">
     <div class="abovePanel">
       <button class="btn btn-success" routerLink="/add">Add new</button>
     </div>
@@ -15,18 +10,18 @@
 </div>
 
 <p *ngIf="loading" class="loading">
-  <img src="./assets/loading.gif" alt="loading">
+  <img src="./assets/loading-big.gif" alt="loading">
 </p>
 
 
 <div class="content" *ngIf="!loading">
-  <table class="table table-striped table-hover">
+  <table class="table table-striped table-hover table-bordered table-responsive">
     <thead>
       <tr>
         <th (click)="sortBy('identifier')" class="tableHeader">Identifier</th>
         <th (click)="sortBy('name')" class="tableHeader">Name</th>
         <th (click)="sortBy('owner')" class="tableHeader">Owner</th>
-        <th (click)="sortBy('date_created')" class="tableHeader">Date Created</th>
+        <th (click)="sortBy('date_created')" class="tableHeader hidden-xs">Date Created</th>
         <th></th>
       </tr>
     </thead>
@@ -35,9 +30,12 @@
         <td>{{ project.identifier }}</td>
         <td>{{ project.name }}</td>
         <td>{{ project.owner }}</td>
-        <td>{{ project.date_created }}</td>
-        <td class="text-center">
-          <div class="btn-group btn-group-xs" role="group" aria-label="Extra-small button group">
+        <td class="hidden-xs">{{ project.date_created }}</td>
+        <td class="text-center actions">
+          <button type="button" class="btn btn-default btnMenu" (click)="contextMenu('contextMenu', project)">
+            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+          </button>
+          <div class="btn-group btn-group-xs hidden" role="group" aria-label="Extra-small button group">
             <button type="button" class="btn btn-warning" (click)="editClicked()" [routerLink]="['/projects', project.id]">Edit</button>
             <button type="button" class="btn btn-primary" (click)="descriptionClicked(project)" data-toggle="modal" data-target="#myModal">Description</button>
             <button type="button" class="btn btn-danger" (click)="deleteClicked(project)" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -48,7 +46,7 @@
   </table>
 </div>
 
-<div class="text-center" *ngIf="projects_array.length > 0">
+<div class="text-center" *ngIf="projects_array.length > 0 && !newPageLoading">
   <app-pagination [totalItems]="projectCount" [itemsPerPage]="itemsPerpage" [maxSize]="5" [displayFirstLast]="true" (onPageChanged)="pageClicked($event)"></app-pagination>
 </div>
 
@@ -92,3 +90,17 @@
     </div>
   </div>
 </div>
+
+<div id="contextMenu" *ngIf="currentProject">
+    <ul class="outerMenu">
+      <li class="menuItem" (click)="editClicked()" [routerLink]="['/projects', currentProject.id]">
+        <p><span class="glyphicon glyphicon-pencil"></span> Edit</p>
+      </li>
+      <li class="menuItem" (click)="descriptionClicked(project)" data-toggle="modal" data-target="#myModal">
+          <p><span class="glyphicon glyphicon-pencil"></span> Description</p>
+      </li>
+      <li class="menuItem" (click)="deleteClicked(project)" data-toggle="modal" data-target="#deleteModal">
+          <p><span class="glyphicon glyphicon-pencil"></span> Delete</p>
+      </li>
+    </ul>
+  </div>

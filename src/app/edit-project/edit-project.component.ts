@@ -25,11 +25,14 @@ export class EditProjectComponent implements OnInit {
     successMessage : false,
     errorMessage : false
   };
- 
+  companies$: Observable<Response>;
 
-  constructor(private addDataService: AppDataService, private mainFormService: MainFormService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private appDataService: AppDataService, private mainFormService: MainFormService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+
+    this.companies$ = this.appDataService.getAllCompanies();
+
     this.project = this.route.snapshot.data["project"];
     this.projectForm = this.mainFormService.projectForm;
     this.projectForm.reset();
@@ -45,12 +48,17 @@ export class EditProjectComponent implements OnInit {
     this.alerts[alert] = false;
   }
 
+  companiesChanged() {
+    console.log(this.projectForm.controls.data);
+  }
+
   save(): void {
-    this.addDataService.updateProject(this.projectForm.value.data)
+    this.appDataService.updateProject(this.projectForm.value.data)
     .subscribe(() => 
       {
         this.alerts.errorMessage = false;
         this.alerts.successMessage = true;
+        console.log("this.projectForm.value",this.projectForm.value);
         console.log(this.projectForm.controls.data);
         this.projectForm.markAsPristine();
       },

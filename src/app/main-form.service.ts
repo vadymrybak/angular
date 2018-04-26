@@ -25,6 +25,9 @@ export class MainFormService {
                   description: this.formBuilder.control(''),
                   date_created: this.formBuilder.control('', Validators.compose([
                     Validators.required
+                  ])),
+                  companies: this.formBuilder.control('', Validators.compose([
+                    Validators.required
                   ]))
               }
           )

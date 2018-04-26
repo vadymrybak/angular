@@ -1,5 +1,6 @@
 .loading {
     text-align: center;
+    margin-top: 20px;
 }
 
 .editLoading {
@@ -25,4 +26,58 @@
 
 .tableHeader:hover {
     color:#009fff
+}
+
+.content {
+    margin-top: 5px;
+}
+
+.table {
+    background-color: #FFF;
+}
+
+.actions {
+    padding: 0px;
+}
+
+.btnMenu {
+    border-radius: 12px;
+}
+
+#contextMenu {
+    display: none;
+    position: absolute;
+}
+
+.outerMenu {
+    border-radius: 10px;
+    list-style-type: none;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    padding:0px;
+    min-width: 125px;
+}
+
+li.menuItem {
+    width: 100%;
+    padding: 5px 15px 5px 15px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+li.menuItem p {
+    margin: 0px;
+}
+
+li.menuItem:hover {
+    background-color: #d4e0e6;
+
+}
+
+li.menuItem a:hover {
+    text-decoration: none;
+}
+
+.menuItem:not(:last-child) {
+    border-bottom: 1px solid;
 }

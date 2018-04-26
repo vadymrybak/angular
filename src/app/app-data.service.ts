@@ -9,6 +9,7 @@ const httpOptions = {
   };
   
 const links = {
+    getCompanies: "/api/companies/",
     get : "/api/projects/",
     getById : "/api/project/",
     update : "/api/update/",
@@ -23,6 +24,12 @@ export class AppDataService {
     constructor(private http:HttpClient) {
 
     }
+
+    getAllCompanies(): Observable<Response> {
+        return this.http.get(links.getCompanies).pipe(
+            map(res => res['payload'])
+        );
+    };
 
     getAllProjects(page: number, itemsPerPage: number, searchString: string): Observable<Project[]> {
         return this.http.get(`${links.get}${page}/${itemsPerPage}/${searchString}`)
@@ -43,6 +50,7 @@ export class AppDataService {
     }
 
     updateProject (project: Project): Observable<any> {
+        console.log("updating", project)
         return this.http.put(links.update, project, httpOptions);
     }
 

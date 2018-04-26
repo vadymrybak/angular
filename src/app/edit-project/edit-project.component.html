@@ -61,11 +61,27 @@
         </div>
 
         <div class="form-group">
-            <label for="txtDescription" class="col-sm-3 control-label">Description</label>
-            <div class="col-sm-9">
-              <textarea class="form-control" id="txtDescription" placeholder="Please enter description" name="description" formControlName="description"></textarea>
-            </div>
+          <label for="txtCompanies" class="col-sm-3 control-label">Companies</label>
+          <div class="col-sm-9">
+              <ng-select
+                [items]="companies$ | async"
+                [multiple]="true"
+                [closeOnSelect]="false"
+                placeholder="Select companies"
+                name="companies" 
+                formControlName="companies">
+              </ng-select>
           </div>
+        </div>
+
+        
+
+        <div class="form-group">
+          <label for="txtDescription" class="col-sm-3 control-label">Description</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" id="txtDescription" placeholder="Please enter description" name="description" formControlName="description"></textarea>
+          </div>
+        </div>
 
         <div class="form-group" hidden>
           <label for="txtDateCreated" class="col-sm-3 control-label">Date Created</label>

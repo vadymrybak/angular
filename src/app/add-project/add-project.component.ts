@@ -5,6 +5,7 @@ import {AppDataService} from "../app-data.service";
 import { FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-add-project',
@@ -20,10 +21,13 @@ export class AddProjectComponent implements OnInit {
     successMessage : false,
     errorMessage : false
   };
+  companies$: Observable<Response>;
 
-  constructor(private mainFormService: MainFormService, private addDataService: AppDataService, private datePipe: DatePipe, private router: Router) { }
+  constructor(private mainFormService: MainFormService, private appDataService: AppDataService, private datePipe: DatePipe, private router: Router) { }
 
   ngOnInit() {
+
+    this.companies$ = this.appDataService.getAllCompanies();
     this.projectForm = this.mainFormService.projectForm;
     this.projectForm.reset();
     this.projectForm.controls.data["controls"].date_created.setValue(this.transformDate(Date.now()));
@@ -37,7 +41,7 @@ export class AddProjectComponent implements OnInit {
   }
 
   add() {
-    this.addDataService.addProject(this.projectForm.value.data).subscribe(
+    this.appDataService.addProject(this.projectForm.value.data).subscribe(
       result => {
         // SUCCESS
         console.log(result);

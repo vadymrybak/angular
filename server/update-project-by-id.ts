@@ -18,6 +18,7 @@ export function updateProjectById(req: Request, res: Response) {
     project.identifier = req.body.identifier;
     project.owner = req.body.owner;
     project.description = req.body.description;
+    project.companies = req.body.companies;
 
     res.status(200).json(project);
 }

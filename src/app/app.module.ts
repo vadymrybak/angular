@@ -20,7 +20,10 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { AddProjectComponent } from './add-project/add-project.component';
-import { ChosenDirective } from './chosen.directive';
+
+
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MenuButtonDirective } from './menu-button.directive';
 
 
 @NgModule({
@@ -33,14 +36,15 @@ import { ChosenDirective } from './chosen.directive';
     EditProjectComponent,
     PaginationComponent,
     AddProjectComponent,
-    ChosenDirective
+    MenuButtonDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   providers: [
     AppDataService,

@@ -33,6 +33,7 @@ export class ProjectListComponent implements OnInit {
   editLoading: boolean = false;
   itemsPerpage: number = 10;
   projectCount: number = 0;
+  newPageLoading: boolean = false;
 
   constructor(private appDataService: AppDataService) { }
 
@@ -60,15 +61,7 @@ export class ProjectListComponent implements OnInit {
     });  
   }
 
-  descriptionClicked(project: Project){
-    this.currentProject = project;
-  }
-
-  deleteClicked(project: Project) {
-    this.currentProject = project;
-  }
-
-  deleteConfirmed(){
+  deleteConfirmed(): void{
     const deleteProject$ = this.appDataService.deleteProject(this.currentProject.id).subscribe(response => {
       console.log("Success: ", response);
       $.notify({
@@ -90,17 +83,18 @@ export class ProjectListComponent implements OnInit {
     );
   }
 
-  editClicked() {
-    this.editLoading = true;
+  editClicked(): void {
+    this.newPageLoading = true;
+    this.loading = true;
   }
 
-  pageClicked(activePage) {
+  pageClicked(activePage): void {
     this.loading = true;
     this.globalSearch.page = activePage;
     this.projectSubject$.next(this.globalSearch);
   }
 
-  searchInputChanged($value){
+  searchInputChanged($value): void{
     this.globalSearch.searchString = $value;
     this.projectSubject$.next(this.globalSearch);
     console.log($value);
@@ -117,5 +111,27 @@ export class ProjectListComponent implements OnInit {
 
     this.projectSubject$.next(this.globalSearch);
 
+  }
+
+  contextMenu(menuId: string, project: Project): void{
+
+    this.currentProject = project;
+
+    // Show menu on menu button click
+    $("body").on("click", ".btnMenu", (e) => {
+      e.stopPropagation();
+      $(`#${menuId}`).hide();
+      $(`#${menuId}`).css({
+        left: e.pageX - 100,
+        top: e.pageY + 10
+      });
+      $(`#${menuId}`).fadeIn(200);
+    });
+
+    // Hide context menu if clicked anywhere outside of it
+    $("body,html").on("click", () => $(`#${menuId}`).hide() );
+
+    // Hide context menu if any menu item clicked
+    $(`#${menuId}`).on("click", "a", () => $(`#${menuId}`).hide() );
   }
 }

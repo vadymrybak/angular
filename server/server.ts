@@ -6,6 +6,7 @@ import { updateProjectById } from './update-project-by-id';
 import { getProjectCount } from './get-project-count';
 import { addProject } from './add-project';
 import { deleteProject } from './delete-project';
+import { getAllCompanies } from './get-all-companies';
 
 const app: Application = express();
 
@@ -22,6 +23,7 @@ app.route('/api/update').put(updateProjectById);
 app.route('/api/projectCount').get(getProjectCount);
 app.route('/api/addProject').post(addProject);
 app.route('/api/deleteProject/:id').get(deleteProject);
+app.route('/api/companies').get(getAllCompanies);
 
 
 const httpServer = app.listen(9000, () => {
