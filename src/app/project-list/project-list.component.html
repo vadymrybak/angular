@@ -80,8 +80,8 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">Confirmation required</h4>
       </div>
-      <div class="modal-body">
-        Please confirm deletion.
+      <div class="modal-body" *ngIf="currentProject">
+        Are you sure you want to delete: {{ currentProject.name }} ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -97,10 +97,10 @@
         <p><span class="glyphicon glyphicon-pencil"></span> Edit</p>
       </li>
       <li class="menuItem" (click)="descriptionClicked(project)" data-toggle="modal" data-target="#myModal">
-          <p><span class="glyphicon glyphicon-pencil"></span> Description</p>
+          <p><span class="glyphicon glyphicon-comment"></span> Description</p>
       </li>
       <li class="menuItem" (click)="deleteClicked(project)" data-toggle="modal" data-target="#deleteModal">
-          <p><span class="glyphicon glyphicon-pencil"></span> Delete</p>
+          <p><span class="glyphicon glyphicon-trash"></span> Delete</p>
       </li>
     </ul>
   </div>
