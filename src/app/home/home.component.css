@@ -1,9 +1,8 @@
-.jumbotron {
-    background-color: #555;
-    color: #FFF;
+
+.ui.piled.segment {
+    padding: 71px;
 }
 
-.thumbnail a>img, .thumbnail>img {
-    max-height: 181px;
-    width: 100%;
+.ui.horizontal.divider.header {
+    margin-bottom: 50px;
 }

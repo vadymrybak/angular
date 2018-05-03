@@ -4,12 +4,12 @@
     font-weight: bold;
 }
 
-html, body {
-    background-color: #fffdefba;
-}
-
 @media (max-width: 768px){
     .container-fluid {
         padding: 0;
     }
+}
+
+body {
+    background-image: url('./assets/background.png');
 }

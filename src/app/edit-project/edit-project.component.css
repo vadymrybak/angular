@@ -1,16 +1,27 @@
-.panel  {
-    width: 70%;
-    margin: 0px auto;
-}
-
-.btn  {
-    display: inline;
-    width: 49%;
-    margin-top: 0px;
+form  {
+    width: 50%;
+    margin: 50px auto;
 }
 
 @media (max-width: 768px){
-    .panel {
+    .form {
         width: 100%;
     }
+}
+
+.submitBtn {
+    margin-top: 10px;
+}
+
+.field.submit {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.ui.header, .field label {
+    color: #FFF;
+}
+
+.sub.header {
+    color: #FFF !important;
 }

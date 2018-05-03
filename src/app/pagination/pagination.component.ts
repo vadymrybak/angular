@@ -42,7 +42,7 @@ export class PaginationComponent implements OnInit {
     this.activePage = pageIndex;
     this.onPageChanged.emit(this.activePage);
     this.buildPageArray();
-    //console.log("activePage is:", this.activePage);
+    console.log("activePage is:", this.activePage);
   }
 
   clicked(page: number, label: any): boolean {

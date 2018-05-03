@@ -1,42 +1,7 @@
-<nav aria-label="Page navigation" *ngIf="pageArray.length > 0" >
-    <ul class="pagination">
-
-      <li (click)="goToFirst()"
-          *ngIf="displayFirstLast"
-          [class.disabled]="activePage == 1">
-        <a href="" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-
-      <li (click)="prevClick()"
-          [class.disabled]="activePage == 1">
-        <a href="" aria-label="Previous">
-          <span aria-hidden="true">&lsaquo;</span>
-        </a>
-      </li>
-
-      <li *ngFor="let page of pageArray ; let i = index"
-          [class.active]="activePage == page"
-          (click)='clicked(page)'>
-        <a href="">{{ page }}</a>
-      </li>
-      
-
-      <li (click)="nextClick()"
-          [class.disabled]="activePage == actualPageCount">
-        <a href="" aria-label="Next">
-          <span aria-hidden="true">&rsaquo;</span>
-        </a>
-      </li>
-
-      <li 
-          *ngIf="displayFirstLast"
-          [class.disabled]="activePage == actualPageCount">
-        <a href="" aria-label="Next" (click)="goToLast()">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-
-    </ul>
-  </nav>
+<div class="ui pagination menu" *ngIf="pageArray.length > 0"> 
+  <a class="item" href="" (click)="goToFirst()"  *ngIf="displayFirstLast"  [class.disabled]="activePage == 1">First</a>
+  <a class="item" href="" (click)="prevClick()"  [class.disabled]="activePage == 1">Prev</a>
+  <a class="item" href="" *ngFor="let page of pageArray ; let i = index" [class.active]="activePage === page" (click)='clicked(page)'>{{ page }}</a>
+  <a class="item" href="" (click)="nextClick()"  [class.disabled]="activePage == actualPageCount">Next</a>
+  <a class="item" href="" (click)="goToLast()"  *ngIf="displayFirstLast"  [class.disabled]="activePage == actualPageCount">Last</a>
+</div>

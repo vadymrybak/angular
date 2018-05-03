@@ -64,17 +64,6 @@ export class ProjectListComponent implements OnInit {
   deleteConfirmed(): void{
     const deleteProject$ = this.appDataService.deleteProject(this.currentProject.id).subscribe(response => {
       console.log("Success: ", response);
-      $.notify({
-        // options
-        message: 'Project Deleted' 
-      },{
-        // settings
-        type: 'warning',
-        placement : {
-          from : "bottom",
-          align: "right"
-        }
-      });
       this.projectSubject$.next(this.globalSearch);
       },
       error => {
@@ -86,6 +75,10 @@ export class ProjectListComponent implements OnInit {
   editClicked(): void {
     this.newPageLoading = true;
     this.loading = true;
+  }
+
+  descriptionClicked(): void {
+    $('.ui.modal.description').modal('show');
   }
 
   pageClicked(activePage): void {
@@ -113,25 +106,14 @@ export class ProjectListComponent implements OnInit {
 
   }
 
-  contextMenu(menuId: string, project: Project): void{
+  deleteClicked(project: Project){
+    $('.ui.basic.modal.delete').modal('show');
+  }
+
+  contextMenu(project: Project): void{
 
     this.currentProject = project;
 
-    // Show menu on menu button click
-    $("body").on("click", ".btnMenu", (e) => {
-      e.stopPropagation();
-      $(`#${menuId}`).hide();
-      $(`#${menuId}`).css({
-        left: e.pageX - 100,
-        top: e.pageY + 10
-      });
-      $(`#${menuId}`).fadeIn(200);
-    });
-
-    // Hide context menu if clicked anywhere outside of it
-    $("body,html").on("click", () => $(`#${menuId}`).hide() );
-
-    // Hide context menu if any menu item clicked
-    $(`#${menuId}`).on("click", "a", () => $(`#${menuId}`).hide() );
+    
   }
 }

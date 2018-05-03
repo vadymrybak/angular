@@ -23,7 +23,8 @@ import { AddProjectComponent } from './add-project/add-project.component';
 
 
 import { NgSelectModule } from '@ng-select/ng-select';
-import { MenuButtonDirective } from './menu-button.directive';
+import { SemanticMultiDropdownDirective } from './semantic-multi-dropdown.directive';
+
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { MenuButtonDirective } from './menu-button.directive';
     EditProjectComponent,
     PaginationComponent,
     AddProjectComponent,
-    MenuButtonDirective
+    SemanticMultiDropdownDirective
   ],
   imports: [
     BrowserModule,
