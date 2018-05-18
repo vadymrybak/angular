@@ -28,7 +28,11 @@ export class ProjectListComponent implements OnInit {
   projectSubject$ = new BehaviorSubject<Search>(new Search(1));  // Set initial page to be 1
   globalSearch = new Search(1);
   projects_array: Project[] = new Array();
+
   loading: boolean = true;
+  inputLoading: boolean = false;
+  
+
   currentProject: Project;
   editLoading: boolean = false;
   itemsPerpage: number = 10;
@@ -43,6 +47,7 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit() {
     this.globalSearch.sortOrder = Order.DESC;
+    this.loading = true;
 
     const projectCount$ = this.appDataService.getProjectscount().subscribe(data => {
       this.projectCount = data;
@@ -51,13 +56,14 @@ export class ProjectListComponent implements OnInit {
     this.projectSubject$
     .debounceTime(500)
     .do(search => {
-      this.loading = true;
+      this.inputLoading = true;
       console.log(search);
     })
     .switchMap( search => this.appDataService.getAllProjects(search.page, this.itemsPerpage, search.searchString))
     .subscribe(data => {
       this.projects_array = data;
       this.loading = false;
+      this.inputLoading = false;
     });  
   }
 

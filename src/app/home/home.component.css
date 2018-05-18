@@ -1,8 +1,13 @@
 
 .ui.piled.segment {
     padding: 71px;
+    opacity: 0.91;
 }
 
 .ui.horizontal.divider.header {
     margin-bottom: 50px;
+}
+
+.horizontal.divider {
+    color: #FFF;
 }

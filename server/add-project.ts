@@ -10,6 +10,7 @@ class ProjectClass implements Project {
     description: string;
     owner: string;
     date_created: Date;
+    companies: Array<string>
 
     constructor(id: number) {
         this.id = id;
@@ -29,6 +30,9 @@ export function addProject(req: Request, res: Response) {
     project.owner = req.body.owner;
     project.description = req.body.description;
     project.date_created = req.body.date_created;
+    project.companies = req.body.companies;
+
+    console.log(project.companies);
 
     PROJECTS.push(project);
 

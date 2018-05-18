@@ -5,5 +5,5 @@ export interface Project {
     description: string;
     owner: string;
     date_created: Date;
-    companies: string;
+    companies: Array<string>;
 }

@@ -13,3 +13,7 @@
 body {
     background-image: url('./assets/background.png');
 }
+
+.hidden {
+    display: none;
+}

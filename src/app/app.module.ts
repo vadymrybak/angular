@@ -25,7 +25,8 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SemanticMultiDropdownDirective } from './semantic-multi-dropdown.directive';
 
-
+import { dictionary } from './dictionary.injectable';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SemanticMultiDropdownDirective } from './semantic-multi-dropdown.direct
     EditProjectComponent,
     PaginationComponent,
     AddProjectComponent,
-    SemanticMultiDropdownDirective
+    SemanticMultiDropdownDirective,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { SemanticMultiDropdownDirective } from './semantic-multi-dropdown.direct
     AppDataService,
     MainFormService,
     ProjectResolver,
-    DatePipe
+    DatePipe,
+    { provide: 'Dictionary', useValue: dictionary }
   ],
   bootstrap: [AppComponent]
 })

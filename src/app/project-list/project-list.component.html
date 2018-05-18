@@ -3,7 +3,7 @@
     <div class="four column row">
       <div class="left floated column">
 
-        <div class="ui icon input">
+        <div class="ui icon input" [class.loading]="inputLoading">
             <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchString" (ngModelChange)="searchInputChanged($event)">
           <i class="search icon"></i>
         </div>
