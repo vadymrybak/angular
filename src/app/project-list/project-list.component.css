@@ -1,6 +1,23 @@
+.ui.menu {
+    min-height: 20px;
+}
+
+.ui.menu .item {
+    padding: 2px 20px;
+}
+
+.dataTable {
+    margin-bottom: 10px !important;
+}
+
+.ui.menu .item>i.icon {
+    margin: 0 !important;
+}
+
+
 .loading {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .editLoading {
@@ -81,3 +98,4 @@ li.menuItem a:hover {
 .menuItem:not(:last-child) {
     border-bottom: 1px solid;
 }
+

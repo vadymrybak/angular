@@ -2,109 +2,101 @@
 <!-- ALERTS -->
 
 <!-- Success alert -->
-<div class="alert alert-success alert-dismissible fade in" role="alert" *ngIf="alerts.successMessage">
-  <button type="button" class="close" aria-label="Close" (click)="close('successMessage')">
-    <span aria-hidden="true">×</span>
-  </button>
-  <strong>Success!</strong> The project has been updated.
+<div class="ui positive message transition" [class.hidden]="!alerts.successMessage">
+  <i class="close icon" (click)="alerts.successMessage = false; alerts.errorMessage = false"></i>
+  <div class="header">
+    Success!
+  </div>
+  <p>The project has been updated.</p>
 </div>
 
 <!-- Error alert -->
-<div class="alert alert-danger alert-dismissible fade in" role="alert" *ngIf="alerts.errorMessage">
-    <button type="button" class="close" aria-label="Close" (click)="close('errorMessage')">
-      <span aria-hidden="true">×</span>
-    </button>
-    <strong>Error!</strong> An error occured while contacting the server...
+<div class="ui warning message transition" [class.hidden]="!alerts.errorMessage">
+  <i class="close icon" (click)="alerts.errorMessage = false"></i>
+  <div class="header">
+    Error!
   </div>
+  <p>An error occured while contacting the server...</p>
+</div>
 
 
-  <div class="page-header">
-      <h3>Adding a new project</h3>
+<h2 class="ui header">
+  <i class="settings icon"></i>
+  <div class="content">
+      {{ verbatims.pageHeader }}
+    <div class="sub header">{{ verbatims.headerDescription }}</div>
+  </div>
+</h2>
+
+
+<form class="ui form" [formGroup]="projectForm">
+  <div formGroupName="data">
+
+    <div class="field hidden">
+      <label>ID</label>
+      <input type="text" id="txtId" name="id" formControlName="id" readonly>
     </div>
 
+    <div class="field">
+      <label>Identifier</label>
+      <input type="text" 
+            id="txidentifier" 
+            placeholder="Please enter identifier" 
+            name="identifier" 
+            formControlName="identifier"
+            >
+      <div class="ui pointing red basic label" 
+            *ngIf="projectForm.controls.data.controls['identifier'].errors?.required && projectForm.controls.data.controls['identifier'].dirty">Identifier is required.</div>
+      <div class="ui pointing red basic label"  
+            *ngIf="projectForm.controls.data.controls['identifier'].invalid && !projectForm.controls.data.controls['identifier'].errors?.required">Identifier is invalid.</div>
+    </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading">Please fill up the form below</div>
-  <div class="panel-body">
+    <div class="field">
+      <label>Project Name</label>
+      <input type="text" id="txtProjectName" placeholder="Please enter project name" name="name" formControlName="name">
+      <div class="ui pointing red basic label" *ngIf="projectForm.controls.data.controls['name'].errors?.required && projectForm.controls.data.controls['name'].dirty">Project name is required.</div>
+    </div>
 
+    <div class="field">
+      <label>Programmers Name</label>
+      <input type="text" id="txtProgrammerName" placeholder="Please enter programmer name" name="owner" formControlName="owner">
+      <div class="ui pointing red basic label" *ngIf="projectForm.controls.data.controls['owner'].errors?.required && projectForm.controls.data.controls['owner'].errors?.dirty">Owner name is required.</div>
+    </div>
 
-    <form class="form-horizontal" [formGroup]="projectForm">
-      <div formGroupName="data">
+    <div class="field">
+      <label>Companies</label>
+      <select name="skills" multiple="" class="ui fluid dropdown" formControlName="companies" SemanticMultiDropdown>
+        <option value="{{company}}" *ngFor="let company of companies$ | async" >{{ company }}</option>
+      </select>
+    </div>
 
-        <div class="form-group hidden">
-          <label for="txtId" class="col-sm-3 control-label">ID </label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="txtId" name="id" formControlName="id" readonly>
-          </div>
-        </div>
+    <div class="field">
+        <label>Description</label>
+        <textarea class="form-control" id="txtDescription" placeholder="Please enter description" name="description" formControlName="description"></textarea>
+      </div>
 
-        <div class="form-group">
-          <label for="txtIdentifier" class="col-sm-3 control-label">Identifier</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="txidentifier" placeholder="Please enter identifier" name="identifier" formControlName="identifier">
-            <div class="formError" *ngIf="projectForm.controls.data.controls['identifier'].errors?.required && projectForm.controls.data.controls['identifier'].dirty">Identifier is required.</div>
-            <div class="formError" *ngIf="projectForm.controls.data.controls['identifier'].invalid && !projectForm.controls.data.controls['identifier'].errors?.required">Identifier is invalid.</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="txtProjectName" class="col-sm-3 control-label">Project Name</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="txtProjectName" placeholder="Please enter project name" name="name" formControlName="name">
-            <div class="formError" *ngIf="projectForm.controls.data.controls['name'].errors?.required && projectForm.controls.data.controls['name'].dirty">Project name is required.</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="txtOwner" class="col-sm-3 control-label">Programmer's Name</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="txtProgrammerName" placeholder="Please enter programmer name" name="owner" formControlName="owner">
-            <div class="formError" *ngIf="projectForm.controls.data.controls['owner'].errors?.required && projectForm.controls.data.controls['owner'].errors?.dirty">Owner name is required.</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="txtCompanies" class="col-sm-3 control-label">Companies</label>
-          <div class="col-sm-9">
-              <ng-select
-                [items]="companies$ | async"
-                [multiple]="true"
-                [closeOnSelect]="false"
-                placeholder="Select companies"
-                name="companies" 
-                formControlName="companies">
-              </ng-select>
-          </div>
-        </div>
-
-        
-
-        <div class="form-group">
-          <label for="txtDescription" class="col-sm-3 control-label">Description</label>
-          <div class="col-sm-9">
-            <textarea class="form-control" id="txtDescription" placeholder="Please enter description" name="description" formControlName="description"></textarea>
-          </div>
-        </div>
-
-        <div class="form-group" hidden>
-          <label for="txtDateCreated" class="col-sm-3 control-label">Date Created</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="txtDateCreated" placeholder="Please enter programmer name" name="date_created"
+      <div class="field hidden">
+          <label>Date Created</label>
+          <input type="text" class="form-control" id="txtDateCreated" placeholder="Please enter programmer name" name="date_created"
               formControlName="date_created" readonly>
-          </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-12">
-          <button type="button" class="btn btn-default btn-block" routerLink="/projects">Back</button>
-          <button type="submit" class="btn btn-primary btn-block" *ngIf="pageType === 'add'" [disabled]="!projectForm.valid" (click)="add()">Add</button>
-          <button type="button" class="btn btn-primary btn-block" *ngIf="pageType === 'edit'" [disabled]="!projectForm.valid || projectForm.pristine" (click)="save()">Edit</button>
-        </div>
-      </div>
-
-    </form>
-
 
   </div>
-</div>
+  <div class="field submit">
+
+      <button class="ui button" routerLink="/projects">
+        Discard
+      </button>
+
+      <button class="ui button" (click)="add()" [class.disabled]="!projectForm.valid" *ngIf="pageType === 'add'" >
+          <i class="save icon"></i>
+          Add
+        </button>
+
+      <button class="ui button" (click)="save()" [class.disabled]="!projectForm.valid || projectForm.pristine" *ngIf="pageType === 'edit'">
+        <i class="save icon"></i>
+        Save
+      </button>
+
+  </div>
+</form>

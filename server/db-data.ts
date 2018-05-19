@@ -1,6 +1,4 @@
-export const COMPANIES: any = [
-  'Meevee', 'Tazzy', 'Oodoo', 'Blognation', 'Kazio', 'Shuffledrive', 'Buzzdog', 'Shufflester', 'Twiyo', 'Trupe', 'Eabox', 'Tekfly', 'Kanoodle', 'Einti', 'Browsetype', 'Zoomzone', 'Babblestorm', 'Fivechat', 'Wikivu', 'Cogilith', 'Fiveclub', 'Realmix', 'Photobug', 'Jabberbean', 'Brainsphere', 'Flashset', 'Eidel', 'Zazio', 'Yozio', 'Quatz', 'Pixoboo', 'Zoonoodle', 'Zoonoodle', 'Photobug', 'Tambee', 'Zava', 'Digitube', 'Zoombeat', 'Yakitri', 'Centizu', 'Vipe', 'Babbleblab', 'Vidoo', 'Jaxspan', 'Oodoo', 'Voonder', 'Fivechat', 'Voonix', 'Dynava', 'Innojam'
-];
+export const COMPANIES: any = ["Meevee", "Tazzy", "Oodoo", "Blognation", "Kazio", "Shuffledrive", "Buzzdog", "Shufflester", "Twiyo", "Trupe", "Eabox", "Tekfly", "Kanoodle", "Einti", "Browsetype", "Zoomzone", "Babblestorm", "Fivechat", "Wikivu", "Cogilith", "Fiveclub", "Realmix", "Photobug", "Jabberbean", "Brainsphere", "Flashset", "Eidel", "Zazio", "Yozio", "Quatz", "Pixoboo", "Zoonoodle", "Tambee", "Zava", "Digitube", "Zoombeat", "Yakitri", "Centizu", "Vipe", "Babbleblab", "Vidoo", "Jaxspan", "Voonder", "Voonix", "Dynava", "Innojam"];
 
 export const PROJECTS: any = [{
   "id": 1,

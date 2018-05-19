@@ -1,21 +1,38 @@
 <div class="row" *ngIf="!newPageLoading">
-  <div class="col-xs-8 col-sm-6 col-md-6">
-    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchString" (ngModelChange)="searchInputChanged($event)">
-  </div>
-  <div class="col-xs-4 col-sm-6 col-md-6">
-    <div class="abovePanel">
-      <button class="btn btn-success" routerLink="/add">Add new</button>
+  <div class="ui grid">
+    <div class="four column row">
+      <div class="left floated column">
+
+        <div class="ui icon input" [class.loading]="inputLoading">
+            <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchString" (ngModelChange)="searchInputChanged($event)">
+          <i class="search icon"></i>
+        </div>
+
+      </div>
+      <div class="right aligned floated column">
+
+        <button class="ui green button" routerLink="/add">
+          <i class="icon user"></i>
+          Add new
+        </button>
+
+      </div>
     </div>
   </div>
 </div>
 
-<p *ngIf="loading" class="loading">
-  <img src="./assets/loading-big.gif" alt="loading">
-</p>
+
+    <div class="ui segment" *ngIf="loading" class="loading">
+        <div class="ui active  dimmer">
+          <div class="ui text loader">Loading</div>
+        </div>
+        <p></p>
+      </div>
+
 
 
 <div class="content" *ngIf="!loading">
-  <table class="table table-striped table-hover table-bordered table-responsive">
+  <table class="ui celled compact table dataTable">
     <thead>
       <tr>
         <th (click)="sortBy('identifier')" class="tableHeader">Identifier</th>
@@ -31,76 +48,56 @@
         <td>{{ project.name }}</td>
         <td>{{ project.owner }}</td>
         <td class="hidden-xs">{{ project.date_created }}</td>
-        <td class="text-center actions">
-          <button type="button" class="btn btn-default btnMenu" (click)="contextMenu('contextMenu', project)">
-            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-          </button>
-          <div class="btn-group btn-group-xs hidden" role="group" aria-label="Extra-small button group">
-            <button type="button" class="btn btn-warning" (click)="editClicked()" [routerLink]="['/projects', project.id]">Edit</button>
-            <button type="button" class="btn btn-primary" (click)="descriptionClicked(project)" data-toggle="modal" data-target="#myModal">Description</button>
-            <button type="button" class="btn btn-danger" (click)="deleteClicked(project)" data-toggle="modal" data-target="#deleteModal">Delete</button>
-          </div>
+        <td class="center aligned actions">
+            <div class="ui compact menu" (click)="contextMenu(project)" (mouseenter)="contextMenu(project)">
+                <div class="ui simple dropdown item">
+                  <i class="bars icon"></i>
+                  <div class="menu">
+                    <div class="item" (click)="editClicked()" [routerLink]="['/projects', project.id]"><i class="edit icon"></i> Edit</div>
+                    <div class="item" (click)="descriptionClicked()"><i class="info circle icon"></i> Description</div>
+                    <div class="item" (click)="deleteClicked(project)" data-toggle="modal" data-target="#deleteModal"><i class="trash alternate icon"></i> Delete</div>
+                  </div>
+                </div>
+              </div>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<div class="text-center" *ngIf="projects_array.length > 0 && !newPageLoading">
-  <app-pagination [totalItems]="projectCount" [itemsPerPage]="itemsPerpage" [maxSize]="5" [displayFirstLast]="true" (onPageChanged)="pageClicked($event)"></app-pagination>
+<div class="ui two column centered grid" *ngIf="projects_array.length > 0 && !newPageLoading">
+  <div class="column">
+    <app-pagination [totalItems]="projectCount" [itemsPerPage]="itemsPerpage" [maxSize]="5" [displayFirstLast]="true" (onPageChanged)="pageClicked($event)"></app-pagination>
+  </div>
 </div>
+
+
 
 <!-- Modal Description -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="currentProject">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Project Description</h4>
-      </div>
-      <div class="modal-body">
-        {{ currentProject.description }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+<div class="ui modal description" *ngIf="currentProject">
+    <div class="header">Description</div>
+    <div class="content">
+      <p>{{ currentProject.description }}</p>
     </div>
   </div>
-</div>
 
 <!-- Modal Delete -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Confirmation required</h4>
-      </div>
-      <div class="modal-body" *ngIf="currentProject">
-        Are you sure you want to delete: {{ currentProject.name }} ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteConfirmed()">Yes, delete it</button>
-      </div>
+<div class="ui basic modal delete" *ngIf="currentProject">
+  <div class="ui icon header">
+    <i class="archive icon"></i>
+    Confirmation required
+  </div>
+  <div class="content">
+    <p>Are you sure you want to delete: {{ currentProject.name }} ?</p>
+  </div>
+  <div class="actions">
+    <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      No
+    </div>
+    <div class="ui green ok inverted button" (click)="deleteConfirmed()">
+      <i class="checkmark icon"></i>
+      Yes
     </div>
   </div>
 </div>
-
-<div id="contextMenu" *ngIf="currentProject">
-    <ul class="outerMenu">
-      <li class="menuItem" (click)="editClicked()" [routerLink]="['/projects', currentProject.id]">
-        <p><span class="glyphicon glyphicon-pencil"></span> Edit</p>
-      </li>
-      <li class="menuItem" (click)="descriptionClicked(project)" data-toggle="modal" data-target="#myModal">
-          <p><span class="glyphicon glyphicon-comment"></span> Description</p>
-      </li>
-      <li class="menuItem" (click)="deleteClicked(project)" data-toggle="modal" data-target="#deleteModal">
-          <p><span class="glyphicon glyphicon-trash"></span> Delete</p>
-      </li>
-    </ul>
-  </div>

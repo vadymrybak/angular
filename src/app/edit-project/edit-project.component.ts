@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Project } from '../model/project';
 
 import {AppDataService} from "../app-data.service";
@@ -10,6 +10,7 @@ import 'rxjs/add/operator/do';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -26,8 +27,16 @@ export class EditProjectComponent implements OnInit {
     errorMessage : false
   };
   companies$: Observable<Response>;
+  verbatims: {};
 
-  constructor(private appDataService: AppDataService, private mainFormService: MainFormService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private appDataService: AppDataService, 
+              private mainFormService: MainFormService, 
+              private route: ActivatedRoute, 
+              private router: Router,
+              @Inject('Dictionary') dict: any) {
+                this.verbatims = <any>dict.edit;
+                console.log(this.verbatims);
+               }
 
   ngOnInit() {
 
@@ -42,6 +51,7 @@ export class EditProjectComponent implements OnInit {
     });
 
     console.log(this.project);
+
   }
 
   close(alert: string): void {

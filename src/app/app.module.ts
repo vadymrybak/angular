@@ -23,8 +23,10 @@ import { AddProjectComponent } from './add-project/add-project.component';
 
 
 import { NgSelectModule } from '@ng-select/ng-select';
-import { MenuButtonDirective } from './menu-button.directive';
+import { SemanticMultiDropdownDirective } from './semantic-multi-dropdown.directive';
 
+import { dictionary } from './dictionary.injectable';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { MenuButtonDirective } from './menu-button.directive';
     EditProjectComponent,
     PaginationComponent,
     AddProjectComponent,
-    MenuButtonDirective
+    SemanticMultiDropdownDirective,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { MenuButtonDirective } from './menu-button.directive';
     AppDataService,
     MainFormService,
     ProjectResolver,
-    DatePipe
+    DatePipe,
+    { provide: 'Dictionary', useValue: dictionary }
   ],
   bootstrap: [AppComponent]
 })

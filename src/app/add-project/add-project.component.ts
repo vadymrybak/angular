@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Project } from '../model/project';
 import { MainFormService } from '../main-form.service';
 import {AppDataService} from "../app-data.service";
@@ -22,8 +22,15 @@ export class AddProjectComponent implements OnInit {
     errorMessage : false
   };
   companies$: Observable<Response>;
+  verbatims: {};
 
-  constructor(private mainFormService: MainFormService, private appDataService: AppDataService, private datePipe: DatePipe, private router: Router) { }
+  constructor(private mainFormService: MainFormService, 
+              private appDataService: AppDataService, 
+              private datePipe: DatePipe, 
+              private router: Router,
+              @Inject('Dictionary') dict: any) {
+                this.verbatims = <any>dict.add;
+              }
 
   ngOnInit() {
 
