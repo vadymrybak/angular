@@ -15,7 +15,8 @@ const links = {
     update : "/api/update/",
     getProjectCount: "/api/projectCount/",
     add: "/api/addProject/",
-    delete: "/api/deleteProject/"
+    delete: "/api/deleteProject/",
+    test: "text.php"
 };
 
 @Injectable()
@@ -24,6 +25,10 @@ export class AppDataService {
     constructor(private http:HttpClient) {
 
     }
+
+    getTest(): Observable<Object> {
+        return this.http.get(links.test);
+    };
 
     getAllCompanies(): Observable<Response> {
         return this.http.get(links.getCompanies).pipe(
