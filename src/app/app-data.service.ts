@@ -16,7 +16,7 @@ const links = {
     getProjectCount: "/api/projectCount/",
     add: "/api/addProject/",
     delete: "/api/deleteProject/",
-    test: "text.php"
+    test: "/api/text.php"
 };
 
 @Injectable()
