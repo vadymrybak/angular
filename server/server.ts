@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 
 
-app.route('/api/projects/:page/:itemsPerPage/:searchString?').get(getAllProjects); // DONE
+app.route('/api/projects').get(getAllProjects); // DONE
 app.route('/api/project/:id').get(getProjectById); // DONE
 app.route('/api/update').put(updateProjectById); // DONE
 app.route('/api/projectCount').get(getProjectCount); // DONE

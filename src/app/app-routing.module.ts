@@ -6,6 +6,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { AddProjectComponent } from './add-project/add-project.component';
 import { ProjectResolver } from './project.resolver';
+import { ContactsComponent } from './contacts/contacts.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: "projects",
     component: ProjectListComponent
+  },
+  {
+    path: "contacts",
+    component: ContactsComponent
   },
   {
     path: "add",

@@ -4,10 +4,15 @@ import { PROJECTS } from "./db-data";
 
 
 export function getAllProjects(req: Request, res: Response) {
-    let page: number = req.params["page"] - 1;
-    let itemsPerPage: number = req.params["itemsPerPage"];
-    let searchString: string = req.params["searchString"];
+    let page: number = req.query["page"] - 1;
+    let itemsPerPage: number = req.query["itemsPerPage"];
+    let searchString: string = req.query["searchString"];
     
+    //console.log("req ", req);
+
+    console.log(page, itemsPerPage, searchString);
+
+
     let from: number = page * itemsPerPage;
     let until: number = +from + +itemsPerPage;
 

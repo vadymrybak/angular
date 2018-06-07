@@ -11,7 +11,7 @@ const httpOptions = {
 // DEV LINKS
 // const links = {
 //     getCompanies: "/api/companies/",
-//     get : "/api/projects/",
+//     get : "/api/projects",
 //     getById : "/api/project/",
 //     update : "/api/update/",
 //     getProjectCount: "/api/projectCount/",
