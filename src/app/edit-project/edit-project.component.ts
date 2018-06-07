@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
-
+import { Verbatim } from '../model/verbatim';
 
 @Component({
   selector: 'app-edit-project',
@@ -27,7 +27,7 @@ export class EditProjectComponent implements OnInit {
     errorMessage : false
   };
   companies$: Observable<Response>;
-  verbatims: {};
+  verbatims: Verbatim;
 
   constructor(private appDataService: AppDataService, 
               private mainFormService: MainFormService, 
@@ -43,6 +43,9 @@ export class EditProjectComponent implements OnInit {
     this.companies$ = this.appDataService.getAllCompanies();
 
     this.project = this.route.snapshot.data["project"];
+
+    console.log("Loaded project: ", this.project);
+
     this.projectForm = this.mainFormService.projectForm;
     this.projectForm.reset();
 
@@ -50,7 +53,7 @@ export class EditProjectComponent implements OnInit {
       data: this.project
     });
 
-    console.log(this.project);
+    
 
   }
 
@@ -74,6 +77,7 @@ export class EditProjectComponent implements OnInit {
       },
       error => {
         console.log("Error updating the project");
+        console.log(error);
         this.alerts.successMessage = false;
         this.alerts.errorMessage = true;
       }

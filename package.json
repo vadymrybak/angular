@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "./node_modules/.bin/ng serve  --proxy-config ./proxy.json --port 4200",
     "server": "./node_modules/.bin/ts-node ./server/server.ts",
-    "build": "ng build --prod",
+    "build": "ng build --prod --base-href http:///vadymrybak.com/projects/angular_demo/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

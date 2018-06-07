@@ -17,10 +17,10 @@ app.use(bodyParser.json());
 
 
 
-app.route('/api/projects/:page/:itemsPerPage/:searchString?').get(getAllProjects);
-app.route('/api/project/:id').get(getProjectById);
-app.route('/api/update').put(updateProjectById);
-app.route('/api/projectCount').get(getProjectCount);
+app.route('/api/projects/:page/:itemsPerPage/:searchString?').get(getAllProjects); // DONE
+app.route('/api/project/:id').get(getProjectById); // DONE
+app.route('/api/update').put(updateProjectById); // DONE
+app.route('/api/projectCount').get(getProjectCount); // DONE
 app.route('/api/addProject').post(addProject);
 app.route('/api/deleteProject/:id').get(deleteProject);
 app.route('/api/companies').get(getAllCompanies);

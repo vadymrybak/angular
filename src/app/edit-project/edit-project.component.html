@@ -23,8 +23,8 @@
 <h2 class="ui header">
   <i class="settings icon"></i>
   <div class="content">
-      {{ verbatims.pageHeader }}
-    <div class="sub header">{{ verbatims.headerDescription }}</div>
+      {{ verbatims['pageHeader'] }}
+    <div class="sub header">{{ verbatims['headerDescription'] }}</div>
   </div>
 </h2>
 
@@ -46,21 +46,21 @@
             formControlName="identifier"
             >
       <div class="ui pointing red basic label" 
-            *ngIf="projectForm.controls.data.controls['identifier'].errors?.required && projectForm.controls.data.controls['identifier'].dirty">Identifier is required.</div>
+            *ngIf="projectForm.controls.data['controls'].identifier.errors?.required && projectForm.controls.data['controls'].identifier.dirty">Identifier is required.</div>
       <div class="ui pointing red basic label"  
-            *ngIf="projectForm.controls.data.controls['identifier'].invalid && !projectForm.controls.data.controls['identifier'].errors?.required">Identifier is invalid.</div>
+            *ngIf="projectForm.controls.data['controls'].identifier.invalid && !projectForm.controls.data['controls'].identifier.errors?.required">Identifier is invalid.</div>
     </div>
 
     <div class="field">
       <label>Project Name</label>
       <input type="text" id="txtProjectName" placeholder="Please enter project name" name="name" formControlName="name">
-      <div class="ui pointing red basic label" *ngIf="projectForm.controls.data.controls['name'].errors?.required && projectForm.controls.data.controls['name'].dirty">Project name is required.</div>
+      <div class="ui pointing red basic label" *ngIf="projectForm.controls.data['controls'].name.errors?.required && projectForm.controls.data['controls'].name.dirty">Project name is required.</div>
     </div>
 
     <div class="field">
       <label>Programmers Name</label>
       <input type="text" id="txtProgrammerName" placeholder="Please enter programmer name" name="owner" formControlName="owner">
-      <div class="ui pointing red basic label" *ngIf="projectForm.controls.data.controls['owner'].errors?.required && projectForm.controls.data.controls['owner'].errors?.dirty">Owner name is required.</div>
+      <div class="ui pointing red basic label" *ngIf="projectForm.controls.data['controls'].owner.errors?.required && projectForm.controls.data['controls'].owner.errors?.dirty">Owner name is required.</div>
     </div>
 
     <div class="field">
