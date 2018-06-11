@@ -5,7 +5,7 @@ include_once("dbSetup.php");
 $page_number = $_GET["page"];
 $projects_per_page = $_GET["itemsPerPage"];
 $search_string = $_GET["searchString"];
-
+ 
 $start_index = null;
 if ($page_number === 1){
     $start_index = 0;

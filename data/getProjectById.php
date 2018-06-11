@@ -4,7 +4,7 @@ include_once("dbSetup.php");
 
 $project_id = $_GET["id"];
 
-
+ 
 $sql = "SELECT DISTINCT  * FROM projects WHERE id = $project_id";
 $result = $conn->query($sql);
 

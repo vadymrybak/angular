@@ -4,9 +4,9 @@ include_once("dbSetup.php");
 
 $sql = "SELECT count(*) as count FROM projects";
 $result = $conn->query($sql);
-
+ 
 $results = array("payload" => array());
-
+ 
 if ($result->num_rows > 0) {
 
     // output data of each row

@@ -21,6 +21,7 @@ const httpOptions = {
 
 // PROD LINKS
 const links = {
+
     getCompanies: "data/getCompanies.php",
     get : "data/getProjects.php",
     getById : "data/getProjectById.php",
@@ -28,6 +29,7 @@ const links = {
     getProjectCount: "data/getProjectCount.php",
     add: "data/insertProject.php",
     delete: "data/deleteProject.php"
+
 };
 
 @Injectable()
@@ -37,6 +39,8 @@ export class AppDataService {
     constructor(private http:HttpClient) {  
         this.headers =new HttpHeaders({ 'Content-Type': 'application/json' });
       }
+
+
 
     getAllCompanies(): Observable<Response> {
         return this.http.get(links.getCompanies).pipe(

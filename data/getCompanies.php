@@ -4,7 +4,7 @@ include_once("dbSetup.php");
  
 $sql = "SELECT name FROM companies";
 $result = $conn->query($sql);
-
+  
 $results = array("payload" => array());
 
 if ($result->num_rows > 0) {
