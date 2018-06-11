@@ -1,7 +1,7 @@
 <?php 
 
 include_once("dbSetup.php");
-
+ 
 $sql = "SELECT name FROM companies";
 $result = $conn->query($sql);
 
